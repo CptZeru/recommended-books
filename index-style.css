@@ -1,0 +1,62 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin:0;
+}
+body{
+    background-image: url(img/books-in-book-shelf.jpg);
+    height: 100vh;
+    background-size: cover;
+    font-family: tahoma;
+}
+
+form{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+form .key-box{
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    text-align:center;
+}
+
+form .key-box i{
+    background-color: #f6416c;
+    width: 50px;
+    line-height: 50px;
+    color:#f8f3d4;
+    font-size: 20px;
+}
+
+form .key-box .input-key,
+form .key-box .btn{
+    border: none;
+    outline: none;
+    font-family: tahoma;
+    transition: 0.5s;
+}
+
+form .key-box .input-key{
+    width: 0;
+    font-size: 15px;
+    font-family: tahoma;
+}
+
+form .key-box .btn{
+    padding: 0 10px;
+    color: #f8f3d4;
+    background-color: #f6416c;
+    text-transform: uppercase;
+    cursor: pointer;
+    letter-spacing: 1px;
+    font-size: 20px;
+}
+
+form .key-box:hover > .input-key,
+form .key-box:focus{
+    padding: 18px;
+    width: 300px;
+}
