@@ -3,8 +3,9 @@
     padding: 0;
     margin:0;
 }
+
 body{
-    background-image: url(img/books-in-book-shelf.jpg);
+    background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(img/books-in-book-shelf.jpg);
     height: 100vh;
     background-size: cover;
     font-family: tahoma;
@@ -15,6 +16,9 @@ form{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+form .form-title{
+    color: #f8f3d4;
 }
 form .key-box{
     height: 50px;
