@@ -29,56 +29,49 @@
                 <h3>Ini judul buku</p>
             </div> -->
             <table>
-                <tr>
+                <tr id="booklist-header">
                     <th>
                         <h1>Book List</h1>
                     </th>
                     <th></th>
                     <th>
-                        <h1 class="text-right">SORT <i class="fa fa-sort"></i></h1>
+                        <a class="sort-btn" href=""><h1 class="text-right">SORT <i class="fa fa-sort"></i></h1></a>
                     </th>
                 </tr>
-                <tr>
-                    <td><h3>Ini Buku</h3></td>
-                    <td><h3>category</h3></td>
-                    <td><h3 class="text-right">edit | delete</h3></td>
-                </tr>
-                <tr>
-                    <td><h3>Ini Buku</h3></td>
-                    <td><h3>category</h3></td>
-                    <td><h3 class="text-right">edit | delete</h3></td>
-                </tr>
-                <tr>
-                    <td><h3>Ini Buku</h3></td>
-                    <td><h3>category</h3></td>
-                    <td><h3 class="text-right">edit | delete</h3></td>
-                </tr>
-                <tr>
-                    <td><h3>Ini Buku</h3></td>
-                    <td><h3>category</h3></td>
-                    <td><h3 class="text-right">edit | delete</h3></td>
-                </tr>
-                <tr>
-                    <td><h3>Ini Buku</h3></td>
-                    <td><h3>category</h3></td>
-                    <td><h3 class="text-right">edit | delete</h3></td>
-                </tr>
-                <tr>
-                    <td><h3>Ini Buku</h3></td>
-                    <td><h3>category</h3></td>
-                    <td><h3 class="text-right">edit | delete</h3></td>
-                </tr>
-                <tr>
-                    <td><h3>Ini Buku</h3></td>
-                    <td><h3>category</h3></td>
-                    <td><h3 class="text-right">edit | delete</h3></td>
-                </tr>
                 <tr class="table-footer">
-                    <td>Add</td>
+                    <td><a class="add-btn" href=""><h3 class="circle-box"><i class="fa fa-plus"></i> Add</h3></i></a></td>
                     <td></td>
-                    <td class="text-right">pagination here</td>
+                    <td><div class="pagination-box">
+                        <a href=""><</a>
+                        <a class="active" href="">1</a>
+                        <a href="">2</a>
+                        <a href="">></a>
+                    </div>    
+                    </td>
                 </tr>
             </table>
         </div>
+        <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+        <script>
+            $(document).ready(function() {
+                var a_url = window.location.href;
+                console.log(a_url);
+                var b_url = new URL(a_url);
+                var key = b_url.searchParams.get("key");
+                console.log(key);
+                $.ajax({
+                    url: "https://fullstack-book.ariefdfaltah.com/book/list?key="+key,
+                    success: function(data) {
+                        for(var i = 0; i<data.meta.data_count; i++){
+                            console.log(data.data[i]);
+                            var book = '<tr><td><h3>' + data.data[i].title + '</h3></td>' +
+                                    '<td><h3 class="text-center">' + data.data[i].category + '</h3></td>' +
+                                    '<td><h3 class="text-right"> edit|delete </h3></td></tr>';
+                                $('#booklist-header').after(book);
+                        }
+                    }
+                });
+            })
+        </script>
     </body>
 </html>

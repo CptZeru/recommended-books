@@ -96,15 +96,16 @@ body {
     color: #f8f3d4;
   }
 
-  /* .sort-btn{
+  .sort-btn{
       text-decoration: none;
-      transform: translate(-100%);
       float: right;
       color: #f8f3d4;
-      font-size: 30px;
-  } */
+  }
   .text-right{
       text-align: right;
+  }
+  .text-center{
+      text-align:center;
   }
   table {
       left:50%;
@@ -115,9 +116,53 @@ body {
   th{
     border-bottom: 5px solid #f8f3d4;
   }
+  td{
+      width: 80px;
+  }
   .table-footer{
     border-top: 5px solid #f8f3d4;
   }
   table, th, td {
     border-collapse: collapse;
   }
+
+  .circle-box{
+    background-color: #f8f3d4;
+    color: #f6416c;
+    width: 100px;
+    height: 25px;
+    border-radius: 40px;
+    padding: 10px;
+}
+.add-btn{
+    text-decoration: none;
+    text-align: center;
+}
+.dummy{
+    visibility: hidden;
+}
+.pagination-box{
+    display: inline-block;
+    
+    /* height: 30px;
+    width: 90px;
+    color: #f6416c;
+    background-color: #f8f3d4; */
+}
+.pagination-box a{
+    padding: 8px 16px;
+    text-decoration: none;
+    border: 1px solid #f8f3d4;
+    color: #f6416c;
+    font-style: bold;
+    font-size: 15px;
+    background-color: #f8f3d4;
+}
+.pagination-box a.active{
+    background-color: #f6416c;
+    border: 1px solid #f8f3d4;
+    color: #f8f3d4;
+}
+.pagination-box a:hover:not(.active){
+    background-color: #d8d5bb;
+}
