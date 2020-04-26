@@ -62,5 +62,5 @@ form .key-box .btn{
 form .key-box:hover > .input-key,
 form .key-box:focus{
     padding: 18px;
-    width: 300px;
+    width: 260px;
 }
