@@ -92,6 +92,29 @@
                         '<button id="bookAddbtn">Add Book</button>'+
                     '</form>'
                     $('.modal-body').append(formModal);
+
+                    // User click button, do submit
+                $("#modal-form").submit(function(e) {
+
+                    e.preventDefault(); // avoid to execute the actual submit of the form.
+
+                    // form = $(this).serializeArray();
+                    // formData = JSON.stringify(form);
+                    var form = serialize_form(this);
+                    var add_url = "https://fullstack-book.ariefdfaltah.com/book/create?key="+key;
+                    console.log(form);
+                    $.ajax({
+                            type: "POST",
+                            url: add_url,
+                            data: form,
+                            dataType: "json",
+                            contentType: "application/json",
+                            success: function(data)
+                            {
+                                alert("Succesfully adding new recommendation book"); // show response from the php script.
+                            }
+                        });
+                    })
                 }
 
                 // When the user clicks on <span> (x), close the modal
@@ -110,7 +133,7 @@
 
                 // Get param api key 
                 var book_ids = [];
-                var deleted = 1;
+                var deleted = 2;
                 var length = 0;
                 var a_url = window.location.href;
                 console.log(a_url);
@@ -183,17 +206,13 @@
                             $('a.delBtn').on('click', function(){
                                 console.log($(this).attr('id'));
                                 console.log(key);
-                                // $.ajax({
-                                //     url: "http://fullstack-book.ariefdfaltah.com/book/delete/" + $(this).attr('id') + "?key="+key,
-                                //     success: function(data) {
-                                //         console.log(data);
-                                //         modal.style.display = "block";
-                                //         console.log(data.data.title);
-                                //         $('.modal-header-txt').html(data.data.title);
-                                //         var contentModal = '<h4>'+ data.data.description +'</h4>'
-                                //         $('.modal-body').append(contentModal);
-                                //     }
-                                // });
+                                $.ajax({
+                                    url: "https://fullstack-book.ariefdfaltah.com/book/delete/" + $(this).attr('id') + "?key="+key,
+                                    success: function(data) {
+                                        console.log(data);
+                                        alert(data.message);
+                                    }
+                                });
                             });
                         });
                     }
