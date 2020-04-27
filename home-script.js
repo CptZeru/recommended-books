@@ -44,6 +44,7 @@ $(document).ready(function() {
                 success: function(data)
                 {
                     alert("Succesfully adding new recommendation book"); // show response from the php script.
+                    location.reload();
                 }
             });
         })
@@ -65,7 +66,7 @@ $(document).ready(function() {
 
     // Get param api key 
     var book_ids = [];
-    var deleted = 2;
+    var deleted = 6;
     var length = 0;
     var a_url = window.location.href;
     console.log(a_url);
@@ -82,29 +83,6 @@ $(document).ready(function() {
     Array.from(new FormData(form).entries())
         .reduce((m, [ key, value ]) => Object.assign(m, { [key]: value }), {})
     );
-
-    // User click button, do submit
-    $("#modal-form").submit(function(e) {
-
-    e.preventDefault(); // avoid to execute the actual submit of the form.
-
-    // form = $(this).serializeArray();
-    // formData = JSON.stringify(form);
-    var form = serialize_form(this);
-    var add_url = "https://fullstack-book.ariefdfaltah.com/book/create?key="+key;
-    console.log(form);
-    $.ajax({
-            type: "POST",
-            url: add_url,
-            data: form,
-            dataType: "json",
-            contentType: "application/json",
-            success: function(data)
-            {
-                alert("Succesfully adding new recommendation book"); // show response from the php script.
-            }
-        });
-    })
 
     // get api data list
     $.ajax({
@@ -143,6 +121,7 @@ $(document).ready(function() {
                         success: function(data) {
                             console.log(data);
                             alert("Delete" + data.message);
+                            location.reload();
                         }
                     });
                 });
