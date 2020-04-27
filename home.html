@@ -61,16 +61,6 @@
                     <h2 class="modal-header-txt">Modal Header</h2>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" id="modal-form" onsubmit="return false;">
-                        <label for="bookTitle">Book Title</label>
-                        <input type="text" name="title" id="bookTitle" placeholder="Enter Book Title">
-                        <label for="bookTitle">Book Category</label>
-                        <input type="text" name="category" id="bookCategory" placeholder="Enter Book Category">
-                        <label for="bookDesc">Book Description</label>
-                        <textarea name="description" id="bookDesc" placeholder="Enter Book Description"></textarea>
-                        <br>
-                        <button id="bookAddbtn">Add Book</button>
-                    </form>
                   </div>
             </div>
         </div>
@@ -90,7 +80,18 @@
                 // When the user clicks on the button, open the modal
                 addBtn.onclick = function() {
                     modal.style.display = "block";
-                    $('.modal-header-txt').
+                    $('.modal-header-txt').html("Add New Recommendation Book");
+                    var formModal = '<form method="POST" id="modal-form" onsubmit="return false;">'+
+                        '<label for="bookTitle">Book Title</label>'+
+                        '<input type="text" name="title" id="bookTitle" placeholder="Enter Book Title">'+
+                        '<label for="bookTitle">Book Category</label>'+
+                        '<input type="text" name="category" id="bookCategory" placeholder="Enter Book Category">'+
+                        '<label for="bookDesc">Book Description</label>'+
+                        '<textarea name="description" id="bookDesc" placeholder="Enter Book Description"></textarea>'+
+                        '<br>'+
+                        '<button id="bookAddbtn">Add Book</button>'+
+                    '</form>'
+                    $('.modal-body').append(formModal);
                 }
 
                 // When the user clicks on <span> (x), close the modal
