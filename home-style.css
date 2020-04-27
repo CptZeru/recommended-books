@@ -119,6 +119,10 @@ body {
   td{
       width: 80px;
   }
+  td .action:hover{
+      color: #ffde7d;
+      cursor: pointer;
+  }
   .table-footer{
     border-top: 5px solid #f8f3d4;
   }
@@ -139,6 +143,7 @@ body {
     text-align: center;
     font-size: 20px;
     font-style: bold;
+    cursor:pointer;
 }
 .dummy{
     visibility: hidden;

@@ -10,7 +10,7 @@
     <body>
         <div class="split left">
             <div class="page-title">
-                <h1>Recommended Books <br> By X</h1>
+                <h1 id="left-title">Recommended Books <br> By X</h1>
             </div>
             <div class="centered">
                 <div class="search-box">
@@ -44,7 +44,7 @@
                     <td><div class="pagination-box">
                         <a href=""><</a>
                         <a class="active" href="">1</a>
-                        <a href="">2</a>
+                        <a href="#" onclick="inilog(); return false;">2</a>
                         <a href="">></a>
                     </div>    
                     </td>
@@ -61,7 +61,7 @@
                     <h2 class="modal-header-txt">Modal Header</h2>
                 </div>
                 <div class="modal-body">
-                  </div>
+                </div>
             </div>
         </div>
         <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
@@ -97,24 +97,30 @@
                 // When the user clicks on <span> (x), close the modal
                 span.onclick = function() {
                     modal.style.display = "none";
+                    $('.modal-body').empty();
                 }
 
                 // When the user clicks anywhere outside of the modal, close it
                 window.onclick = function(event) {
                     if (event.target == modal) {
                         modal.style.display = "none";
+                        $('.modal-body').empty();
                     }
                 }
 
                 // Get param api key 
+                var book_ids = [];
+                var deleted = 1;
+                var length = 0;
                 var a_url = window.location.href;
                 console.log(a_url);
                 var b_url = new URL(a_url);
                 var key = b_url.searchParams.get("key");
                 console.log(key);
 
-                // Get the submit btn
-                var formBtn = document.getElementById("bookAddbtn");
+                // change title and page title name
+                $('title').html("Recommendation Books by "+key);
+                $('#left-title').html("Recommended Books <br> By " +key);
 
                 //Serialize_form function
                 var serialize_form = form => JSON.stringify(
@@ -149,15 +155,49 @@
                 $.ajax({
                     url: "https://fullstack-book.ariefdfaltah.com/book/list?key="+key,
                     success: function(data) {
-                        for(var i = 0; i<data.meta.data_count; i++){
+                        length = data.meta.data_count - deleted;
+                        for(var i = 0; i < length; i++){
                             console.log(data.data[i]);
                             var book = '<tr><td><h3>' + data.data[i].title + '</h3></td>' +
                                     '<td><h3 class="text-center">' + data.data[i].category + '</h3></td>' +
-                                    '<td><h3 class="text-right"> edit|delete </h3></td></tr>';
+                                    '<td><h3 class="text-center"> <a class="fa fa-eye action detailBtn" id="' + data.data[i].id + '"></a> | <a class="fa fa-trash action delBtn" id="' + data.data[i].id + '"></a> </h3></td></tr>';
                                 $('#booklist-header').after(book);
-                        }
+                            }
+                            //detail function on click
+                            $('a.detailBtn').on('click', function(){
+                                console.log($(this).attr('id'));
+                                console.log(key);
+                                $.ajax({
+                                    url: "https://fullstack-book.ariefdfaltah.com/book/detail/" + $(this).attr('id') + "?key="+key,
+                                    success: function(data) {
+                                        console.log(data);
+                                        modal.style.display = "block";
+                                        console.log(data.data.title);
+                                        $('.modal-header-txt').html(data.data.title);
+                                        var contentModal = '<h4>'+ data.data.description +'</h4>'
+                                        $('.modal-body').append(contentModal);
+                                    }
+                            });
+                            console.log("masuk");
+                            //delete function
+                            $('a.delBtn').on('click', function(){
+                                console.log($(this).attr('id'));
+                                console.log(key);
+                                // $.ajax({
+                                //     url: "http://fullstack-book.ariefdfaltah.com/book/delete/" + $(this).attr('id') + "?key="+key,
+                                //     success: function(data) {
+                                //         console.log(data);
+                                //         modal.style.display = "block";
+                                //         console.log(data.data.title);
+                                //         $('.modal-header-txt').html(data.data.title);
+                                //         var contentModal = '<h4>'+ data.data.description +'</h4>'
+                                //         $('.modal-body').append(contentModal);
+                                //     }
+                                // });
+                            });
+                        });
                     }
-                });
+                });               
             })
         </script>
     </body>
